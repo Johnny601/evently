@@ -1,7 +1,11 @@
-import stripe from "stripe";
+import Stripe from "stripe";
 import { NextResponse } from "next/server";
 import { createOrder } from "@/lib/actions/order.actions";
 import { headers } from "next/headers";
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2023-10-16",
+});
 
 export async function POST(request: Request) {
   const body = await request.text();
